@@ -31,16 +31,6 @@ class Character(db.Model):
     gender = db.Column(String(250))
     favorites = db.relationship("Favorite")
 
-class Starship(db.Model):
-    __tablename__ = 'starship'
-    id = db.Column(Integer, primary_key=True)
-    name = db.Column(String(250), nullable=False)
-    model = db.Column(String(250))
-    manufacturer = db.Column(String(250))
-    crew = db.Column(Integer)
-    passengers = db.Column(Integer)
-    favorites = db.relationship("Favorite")
-    # Add any additional fields as necessary
 
 class Favorite(Base):
     __tablename__ = 'favorite'
