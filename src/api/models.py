@@ -12,7 +12,7 @@ class User(db.Model):
     person = db.relationship("Person")
 
 
-class Planet(Base):
+class Planet(db.Model):
     __tablename__ = 'planet'
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(250), nullable=False)
@@ -21,7 +21,7 @@ class Planet(Base):
     population = db.Column(Integer)
     favorites = db.relationship("Favorite")
 
-class Character(Base):
+class Character(db.Model):
     __tablename__ = 'character'
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(250), nullable=False)
@@ -31,7 +31,7 @@ class Character(Base):
     gender = db.Column(String(250))
     favorites = db.relationship("Favorite")
 
-class Starship(Base):
+class Starship(db.Model):
     __tablename__ = 'starship'
     id = db.Column(Integer, primary_key=True)
     name = db.Column(String(250), nullable=False)
@@ -51,4 +51,4 @@ class Favorite(Base):
     starship_id = db.Column(Integer, ForeignKey('starship.id'))
 
 ## Draw from SQLAlchemy base
-render_er(Base, 'diagram.png')
+render_er(db.Model, 'diagram.png')
