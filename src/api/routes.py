@@ -16,7 +16,7 @@ CORS(api)
 @api.route('/users', methods=['GET'])
 def get_users():
     users = User.query.all()
-    return jsonify([user.to_dict() for user in users]), 200
+    return jsonify([user.serialize() for user in users]), 200
 
 @api.route('/users/', methods=['POST'])
 def create_user():
@@ -24,19 +24,19 @@ def create_user():
     user = User(username=request_body["username"], password=request_body["password"])
     db.session.add(user)
     db.session.commit()
-    return jsonify(user.to_dict()), 200
+    return jsonify(user.serialize()), 200
 
 @api.route('/users/<int:id>', methods=['GET'])
 def get_single_user(id):
     user = User.query.get(id)
-    return jsonify(user.to_dict()), 200
+    return jsonify(user.serialize()), 200
 
 @api.route('/users/<int:id>', methods=['DELETE'])
 def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
     db.session.commit()
-    return jsonify(user.to_dict(),'deleted'), 200
+    return jsonify(user.serialize(),'deleted'), 200
 
 
 

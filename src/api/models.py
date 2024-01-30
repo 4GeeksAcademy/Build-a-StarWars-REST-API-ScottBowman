@@ -11,6 +11,14 @@ class User(db.Model):
     password = db.Column(db.String(250), nullable=False)
     favorites = db.relationship("Favorite")
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "favorites": self.favorites,
+            # do not serialize the password, its a security breach
+        }
+
 
 class Planet(db.Model):
     __tablename__ = 'planet'
@@ -21,6 +29,17 @@ class Planet(db.Model):
     population = db.Column(db.Integer)
     favorites = db.relationship("Favorite")
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "climate": self.climate,
+            "terrain": self.terrain,
+            "population": self.population,
+            "favorites": self.favorites,
+            # do not serialize the password, its a security breach
+        }
+
 class Character(db.Model):
     __tablename__ = 'character'
     id = db.Column(db.Integer, primary_key=True)
@@ -30,6 +49,17 @@ class Character(db.Model):
     eye_color = db.Column(db.String(250))
     gender = db.Column(db.String(250))
     favorites = db.relationship("Favorite")
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.username,
+            "height": self.height,
+            "hair_color": self.hair_color,
+            "eye_color": self.eye_color,
+            "gender": self.gender,
+            "favorites": self.favorites,
+            # do not serialize the password, its a security breach
+        }
 
 
 class Favorite(db.Model):
@@ -38,5 +68,12 @@ class Favorite(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     planet_id = db.Column(db.Integer, db.ForeignKey('planet.id'))
     character_id = db.Column(db.Integer, db.ForeignKey('character.id'))
-
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "planet_id": self.palnenet_id,
+            "character_id": self.character_id,
+            # do not serialize the password, its a security breach
+        }
 
