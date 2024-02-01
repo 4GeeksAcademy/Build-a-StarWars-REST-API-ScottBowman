@@ -15,7 +15,7 @@ class User(db.Model):
         return {
             "id": self.id,
             "username": self.username,
-            "favorites": self.favorites,
+
             # do not serialize the password, its a security breach
         }
 
@@ -52,7 +52,7 @@ class Character(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.username,
+            "name": self.name,
             "height": self.height,
             "hair_color": self.hair_color,
             "eye_color": self.eye_color,
@@ -72,7 +72,7 @@ class Favorite(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id,
-            "planet_id": self.palnenet_id,
+            "planet_id": self.planet_id,
             "character_id": self.character_id,
             # do not serialize the password, its a security breach
         }
